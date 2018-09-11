@@ -10,7 +10,7 @@
      <hr>
   <p>This site lists every event I could find during the freshers period, from every company and every venue.</p>
   
-  <p>I hope it helps you find something new. If I missed anything, or you have any comments, get in <a href="https://www.facebook.com/tmklrss">touch</a></p>
+  <p>I hope it helps you find something new. If I missed anything, or you have any comments, get in <a href="mailto:mahony-kelrosst@cardiff.ac.uk">touch</a></p>
   
   <em>-Tom and the CompSoc Committee </em>
   <br>
@@ -38,13 +38,24 @@
   <b-row v-for="(swiper,id) in swipers" :key="id" class="no-gutters" style="">
     <b-col class="col-xs-12 col-sm-12 col-md-2">
         <b-card no-body class="text-center h-100 d-flex">
-          <div class="card-body align-items-center d-flex flex-column justify-content-center noto no-pointer">
+          <div class="card-body align-items-center d-flex flex-row justify-content-around noto no-pointer">
+
+            <div class="swiper_label">
             <p class="swiper_label_day">
               {{ swiper.day_label }}
             </p>
             <p class="swiper_label_month">
             {{ swiper.month_label }}
             </p>
+            </div>
+            <div class="event_count" v-if="$mq === 'xs'">
+              <p class="event_label_total">
+              {{ swiper.total_events }}
+            </p>
+            <p class="swiper_label_text">
+            Events
+            </p>
+            </div>
           </div> 
            </b-card>
     </b-col>
@@ -150,9 +161,9 @@ function createSwipers() {
   for (let index = 1; index < 17; index++) {
     fresher_days.push(new FresherDay(index, 10));
   }
-  console.log(fresher_days);
+  // console.log(fresher_days);
 
-  console.log(events);
+  // console.log(events);
 
   events.forEach(event => {
     event.image_url = require("@/assets/events/" +
@@ -237,6 +248,7 @@ function createSwipers() {
       i: i.toString(),
       options: new swiperOption(i),
       events: swiper_events,
+      total_events: swiper_events.length,
       day_label: getGetOrdinal(fresher_day.day),
       month_label: fresher_day.month == 9 ? "September" : "October",
       swipe_ref: i.toString() + "swiper"
@@ -310,6 +322,11 @@ export default {
 }
 
 .swiper_label_day {
+  font-size: 5vh;
+  margin: 0px;
+}
+
+.event_label_total {
   font-size: 5vh;
   margin: 0px;
 }
