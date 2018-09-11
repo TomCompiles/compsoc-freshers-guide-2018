@@ -10,9 +10,9 @@
      <hr>
   <p>This site lists every event I could find during the freshers period, from every company and every venue.</p>
   
-  <p>I hope it helps you find something new. If I missed anything, or you have any comments, get in touch!</p>
+  <p>I hope it helps you find something new. If I missed anything, or you have any comments, get in <a href="https://www.facebook.com/tmklrss">touch</a></p>
   
-  <em>-Tom and the CompSoc Comitee </em>
+  <em>-Tom and the CompSoc Committee </em>
   <br>
   <br>
   <!-- <button role="button" class="btn btn-outline-info" v-b-toggle="'info'" ><font-awesome-icon :icon="'fa-info'" /> Learn More</button>
@@ -110,14 +110,16 @@
         <b-img fluid :src="selected_event.image_url"/>
         <hr>
         <h3>{{selected_event.name}}</h3>
+        <p>By {{selected_event.organiser.name}}</p>
+        <p>At {{selected_event.venue.name}} on {{selected_event.day}}/{{selected_event.month}}</p>
 
          
          
         <!-- <a :href="selected_event.facebook_url"> -->
-           <a :href="selected_event.facebook_url" role="button" class="btn btn-outline-info"><font-awesome-icon :icon="['fab', 'facebook-square']" /> Facebook Event</a>
+           <a v-if="selected_event.facebook_url" :href="selected_event.facebook_url" role="button" class="btn btn-outline-info"><font-awesome-icon :icon="['fab', 'facebook-square']" /> Facebook Event</a>
          <!-- </a> -->
         <!-- <a :href="selected_event.ticket_url"> -->
-          <a :href="selected_event.ticket_url" role="button" class="btn btn-outline-success"><font-awesome-icon icon="ticket-alt" /> Buy tickets</a>
+          <a v-if="selected_event.ticket_url" :href="selected_event.ticket_url" role="button" class="btn btn-outline-success"><font-awesome-icon icon="ticket-alt" /> Buy tickets</a>
         <!-- </a> -->
         <!-- <p>{{selected_event.ticket_url}}</p> -->
       </div>
@@ -141,7 +143,7 @@ function createSwipers() {
   }
   const fresher_days = [];
 
-  for (let index = 16; index < 30; index++) {
+  for (let index = 15; index < 30; index++) {
     fresher_days.push(new FresherDay(index, 9));
   }
 
